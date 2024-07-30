@@ -10,9 +10,13 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Load & Cache Dependencies
+        id : cache-deps
         uses: ./.github/actions/cached-deps
         with: 
           caching: 'false'
+        # output of the action now used in our workflow after using the action, for that adding following step, cache-deps is id of above step, where we used action. used-cache is output defined
+      - name: Output Information
+        run: echo "Cache used? ${{ steps.cache-deps.outputs.used-cache }}"
       - name: Lint code
         run: npm run lint
   test:

@@ -5,6 +5,10 @@ inputs:
     description: 'Whether to cache dependencies or not.'
     required: false
     default: 'true'
+outputs:
+  used-cache:
+      description: 'Whether the cache was used.'
+      value: ${{ steps.install.outputs.cache }}
 runs:
   using: 'composite'
   steps:
@@ -16,8 +20,12 @@ runs:
           path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
+      id: install
       # either of the both conditions not matched then I want to execute dependency execution command
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
-      run: npm ci
+      run: |
+        npm ci
+        echo "::set-output name=cache::'${{ inputs.caching }}"
+      # setting name=cache output of this step comment for above line
       # which shell should be used for executing the step
       shell: bash
