@@ -65,11 +65,16 @@ jobs:
         run: ls
       - name: Deploy site
         run: echo "Deploying..."
-
-  information:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Run custom action
+      - name: Deploy Site
         uses: ./.github/actions/deploy-s3-javascript
+        # provide AWS S3 credentials
+        # env:
+        #  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        #  SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+        # provide some input values for bucket,bucket-region, dist-folder
+        with: 
+          bucket: 'web-bucket'
+          dist-folder: ./dist
+          # bucket-region: us-east-2
+
+  
