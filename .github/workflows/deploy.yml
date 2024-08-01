@@ -62,9 +62,7 @@ jobs:
           name: dist-files
           path: ./dist
       - name: Output contents
-        run: ls
-      - name: Deploy site
-        run: echo "Deploying..."
+        run: ls       
       - name: Deploy Site
         uses: ./.github/actions/deploy-s3-javascript
         # provide AWS S3 credentials
