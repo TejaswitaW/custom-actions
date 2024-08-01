@@ -15,7 +15,7 @@ function run() {
     const s3Uri = `s3://${bucket}`
     // exec.exec('aws s3 sync <localFolder> <s3-bucket path> ')
     // exec.exec(`aws s3 sync ${distFolder} ${s3Uri} --region ${bucketRegion}`)
-    exec.exec('echo Dist-Folder: $distFolder S3Uri: $s3Uri Bucket-Region: $bucketRegion')
+    exec.exec('echo "Dist-Folder: $distFolder S3Uri: $s3Uri Bucket-Region: $bucketRegion"')
   
 }
 
