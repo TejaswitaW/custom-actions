@@ -12,10 +12,12 @@ function run() {
 
     // Using these inputs we upload files
     // creating identifier of S3 bucket, that path is constructed dynamically
-    const s3Uri = `s3://${bucket}`
+    const s3Uri = `s3://${bucket}`;
     // exec.exec('aws s3 sync <localFolder> <s3-bucket path> ')
     // exec.exec(`aws s3 sync ${distFolder} ${s3Uri} --region ${bucketRegion}`)
-    exec.exec(`echo "Dist-Folder: ${distFolder} S3Uri: ${s3Uri} Bucket-Region: ${bucketRegion}"`)
+    exec.exec(`echo "Dist-Folder: ${distFolder} S3Uri: ${s3Uri} Bucket-Region: ${bucketRegion}"`);
+    const websiteUrl = `http://${bucket}.s3-website-${bucketRegion}.amazonaws.com`;
+    core.setOutput('website-url',websiteUrl);
   
 }
 
